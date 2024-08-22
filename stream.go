@@ -21,9 +21,9 @@ type Stream struct {
 }
 
 func (s *Stream) run() {
-	blackStyle := tcell.StyleDefault.
-		Foreground(tcell.ColorBlack).
-		Background(tcell.ColorBlack)
+	blackStyle := tcell.StyleDefault//.
+	// 	Foreground(tcell.ColorBlack).
+	// 	Background(tcell.ColorBlack)
 
 	midStyleA := blackStyle.Foreground(tcell.ColorGreen)
 	midStyleB := blackStyle.Foreground(tcell.ColorLime)

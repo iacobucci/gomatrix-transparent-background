@@ -31,7 +31,7 @@ var opts struct {
 	Profile string `short:"p" long:"profile" description:"Write profile to given file path"`
 
 	// FPS
-	FPS int `long:"fps" description:"required FPS, must be somewhere between 1 and 60" default:"25"`
+	FPS int `long:"fps" description:"required FPS, must be somewhere between 1 and 60" default:"60"`
 }
 
 // array with half width kanas as Go runes
@@ -120,7 +120,6 @@ func main() {
 		}
 	}
 	// Use a println for fun..
-	fmt.Println("Opening connection to The Matrix.. Please stand by..")
 	// setup logging with logfile /dev/null or ~/.gomatrix-log
 	filename := os.DevNull
 	if opts.Logging {
@@ -159,9 +158,9 @@ func main() {
 		os.Exit(1)
 	}
 	screen.HideCursor()
-	screen.SetStyle(tcell.StyleDefault.
-		Background(tcell.ColorBlack).
-		Foreground(tcell.ColorBlack))
+	// screen.SetStyle(tcell.StyleDefault.
+	// 	Background(tcell.ColorLightSalmon).
+	// 	Foreground(tcell.ColorBlack))
 	screen.Clear()
 
 	// StreamDisplay manager
@@ -223,7 +222,7 @@ func main() {
 	// flusher flushes the termbox every x milliseconds
 	curFPS := opts.FPS
 	fpsSleepTime := time.Duration(1000000/curFPS) * time.Microsecond
-	fmt.Printf("fps sleep time: %s\n", fpsSleepTime.String())
+	// fmt.Printf("fps sleep time: %s\n", fpsSleepTime.String())
 	go func() {
 		for {
 			time.Sleep(fpsSleepTime)
@@ -310,9 +309,6 @@ EVENTS:
 
 	// close down
 	screen.Fini()
-
-	log.Println("stopping gomatrix")
-	fmt.Println("Thank you for connecting with Morpheus' Matrix API v4.2. Have a nice day!")
 
 	// stop profiling (if required)
 	if len(opts.Profile) > 0 {
